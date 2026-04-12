@@ -101,7 +101,7 @@ class VirtualProductEvents implements EventSubscriberInterface
      *
      * @api
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             TheliaEvents::VIRTUAL_PRODUCT_ORDER_HANDLE => ['handleOrder', 128],
