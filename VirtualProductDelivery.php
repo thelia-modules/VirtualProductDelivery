@@ -39,7 +39,13 @@ class VirtualProductDelivery extends AbstractDeliveryModuleWithState
      */
     public function isValidDelivery(Country $country, State $state = null): bool
     {
-        return $this->getRequest()->getSession()->getSessionCart($this->getDispatcher())->isVirtual();
+        $request = $this->getRequest();
+
+        if (null === $request || !$request->hasSession()) {
+            return false;
+        }
+
+        return $request->getSession()->getSessionCart($this->getDispatcher())->isVirtual();
     }
 
     public function getPostage(Country $country, State $state = null): OrderPostage|float
