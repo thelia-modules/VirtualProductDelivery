@@ -37,7 +37,7 @@ class VirtualProductDelivery extends AbstractDeliveryModuleWithState
      *
      * @return bool true if there is only virtual products in cart elsewhere false
      */
-    public function isValidDelivery(Country $country, State $state = null): bool
+    public function isValidDelivery(Country $country, ?State $state = null): bool
     {
         $request = $this->getRequest();
 
@@ -48,7 +48,7 @@ class VirtualProductDelivery extends AbstractDeliveryModuleWithState
         return $request->getSession()->getSessionCart($this->getDispatcher())->isVirtual();
     }
 
-    public function getPostage(Country $country, State $state = null): OrderPostage|float
+    public function getPostage(Country $country, ?State $state = null): OrderPostage|float
     {
         if (!$this->isValidDelivery($country, $state)) {
             throw new DeliveryException(
@@ -69,7 +69,7 @@ class VirtualProductDelivery extends AbstractDeliveryModuleWithState
         return true;
     }
 
-    public function postActivation(ConnectionInterface $con = null): void
+    public function postActivation(?ConnectionInterface $con = null): void
     {
         // create new message
         if (null === MessageQuery::create()->findOneByName('mail_virtualproduct')) {
