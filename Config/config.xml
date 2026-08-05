@@ -17,10 +17,10 @@
 
     <hooks>
         <hook id="virtualproductdelivery.hook" class="VirtualProductDelivery\Hook\HookManager">
-            <tag name="hook.event_listener" event="order-invoice.delivery-address" type="front" templates="render:delivery-address.html" />
+            <tag name="hook.event_listener" event="order-invoice.delivery-address" type="front" templates="render:delivery-address.html.twig" />
             <tag name="hook.event_listener" event="account-order.after-products" type="front"/>
-            <tag name="hook.event_listener" event="delivery.delivery-address" type="pdf" templates="render:delivery-address.html" />
-            <tag name="hook.event_listener" event="invoice.delivery-address" type="pdf" templates="render:delivery-address.html" />
+            <tag name="hook.event_listener" event="delivery.delivery-address" type="pdf" templates="render:delivery-address.html.twig" />
+            <tag name="hook.event_listener" event="invoice.delivery-address" type="pdf" templates="render:delivery-address.html.twig" />
         </hook>
     </hooks>
 
