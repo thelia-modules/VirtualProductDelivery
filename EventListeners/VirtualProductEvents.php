@@ -20,9 +20,7 @@ use Thelia\Core\Event\Product\VirtualProductOrderHandleEvent;
 use Thelia\Core\Event\TheliaEvents;
 use Thelia\Core\Translation\Translator;
 use Thelia\Model\ConfigQuery;
-use Thelia\Model\MetaData as MetaDataModel;
-use Thelia\Model\MetaDataQuery;
-use Thelia\Model\ProductDocumentQuery;
+use Thelia\Model\ProductSaleElementsQuery;
 use VirtualProductDelivery\VirtualProductDelivery;
 
 /**
@@ -34,17 +32,11 @@ class VirtualProductEvents implements EventSubscriberInterface
 {
     public function handleOrder(VirtualProductOrderHandleEvent $event): void
     {
-        $documentId = MetaDataQuery::getVal(
-            'virtual',
-            MetaDataModel::PSE_KEY,
-            $event->getPseId()
-        );
+        $saleElement = ProductSaleElementsQuery::create()->findPk($event->getPseId());
+        $productDocument = $saleElement?->getVirtualDocument();
 
-        if (null !== $documentId) {
-            $productDocument = ProductDocumentQuery::create()->findPk($documentId);
-            if (null !== $productDocument) {
-                $event->setPath($productDocument->getFile());
-            }
+        if (null !== $productDocument) {
+            $event->setPath($productDocument->getFile());
         }
     }
 

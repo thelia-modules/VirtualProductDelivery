@@ -3,7 +3,7 @@
     "license": "GPL-3.0-or-later",
     "type": "thelia-module",
     "require": {
-        "thelia/core": ">=3.0.0-beta2",
+        "thelia/core": ">=3.0.0-beta3",
         "thelia/installer": "^1.6"
     },
     "extra": {
